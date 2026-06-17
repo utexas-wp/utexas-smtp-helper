@@ -44,16 +44,16 @@ function utexas_missing_plugin_wp_smtp__warning() {
 }
 
 // Check if required plugins are active -- if not, display a warning message on the dashboard.
-function utexas_smtp_helper_wp_check_plugins() {
+function utexas_smtp_helper_check_plugins() {
 	if ( ! is_plugin_active( 'wp-mail-smtp/wp_mail_smtp.php' ) ) {
 		add_action( 'admin_notices', 'utexas_missing_plugin_wp_smtp__warning' );
 	}
 }
 
-add_action( 'admin_init', 'utexas_smtp_helper_wp_check_plugins' );
+add_action( 'admin_init', 'utexas_smtp_helper_check_plugins' );
 
 // Activate other required plugins when this plugin is activated.
-function utexas_smtp_helper_wp_activate() {
+function utexas_smtp_helper_activate() {
 	if ( ! is_plugin_active( 'wp-mail-smtp/wp-mail-smtp.php' ) ) {
 		activate_plugins( array( 'wp-mail-smtp/wp-mail-smtp.php' ) );
 	}
