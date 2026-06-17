@@ -13,6 +13,9 @@
  * @package utexas-smtp-helper
  */
 
+// Add file includes.
+require_once plugin_dir_path(__FILE__) . 'plugin-updater.php';
+
 // This plugin only populates values in Pantheon environments.
 if ( function_exists( 'pantheon_get_secret' ) ) {
 	// See https://wpmailsmtp.com/docs/how-to-secure-smtp-settings-by-using-constants/.
