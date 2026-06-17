@@ -5,29 +5,29 @@
  */
 
 // This filter alters where WordPress looks for specific plugin update info.
-add_filter( 'plugins_api', 'utexas_smtp_helper_wp_plugin_info', 20, 3 );
+add_filter( 'plugins_api', 'utexas_smtp_helper_plugin_info', 20, 3 );
 // This filter compares the latest version to the current version and reports an update.
-add_filter( 'site_transient_update_plugins', 'utexas_smtp_helper_wp_plugin_update' );
+add_filter( 'site_transient_update_plugins', 'utexas_smtp_helper_plugin_update' );
 // This filter ensures the plugin is deposited in the root plugin directory.
-add_filter( 'upgrader_install_package_result', 'utexas_smtp_helper_wp_move_plugin', 10, 2 );
+add_filter( 'upgrader_install_package_result', 'utexas_smtp_helper_move_plugin', 10, 2 );
 
 class UtexasSmtpPluginUpdater {
-	public static $slug      = 'utexas-smtp-helper-wp';
+	public static $slug      = 'utexas-smtp-helper';
 	public static $tested    = '7.0.0';
-	public static $info      = 'https://raw.githubusercontent.com/utexas-wp/utexas-smtp-helper-wp/refs/heads/master/utexas-smtp-helper-wp.php';
-	public static $changelog = '<a href="https://github.com/utexas-wp/utexas-smtp-helper-wp/blob/master/CHANGELOG.md">https://github.com/utexas-wp/utexas-smtp-helper-wp/blob/master/CHANGELOG.md</a>';
+	public static $info      = 'https://raw.githubusercontent.com/utexas-wp/utexas-smtp-helper/refs/heads/master/utexas-smtp-helper.php';
+	public static $changelog = '<a href="https://github.com/utexas-wp/utexas-smtp-helper/blob/master/CHANGELOG.md">https://github.com/utexas-wp/utexas-smtp-helper/blob/master/CHANGELOG.md</a>';
 }
 
-function utexas_smtp_helper_wp_plugin_info( $res, $action, $args ) {
+function utexas_smtp_helper_plugin_info( $res, $action, $args ) {
 	// Do nothing if this is not our plugin or a different action.
 	if ( 'plugin_information' !== $action || UtexasSmtpPluginUpdater::$slug !== $args->slug ) {
 		return $res;
 	}
-	$latest = utexas_smtp_helper_wp_get_remote_data();
+	$latest = utexas_smtp_helper_get_remote_data();
 	if ( false === $latest ) {
 		return $res;
 	}
-	$plugin_info                = utexas_smtp_helper_wp_get_local_data();
+	$plugin_info                = utexas_smtp_helper_get_local_data();
 	$res                        = new stdClass();
 	$res->name                  = $plugin_info['Name'];
 	$res->slug                  = $plugin_info['TextDomain'];
@@ -43,15 +43,15 @@ function utexas_smtp_helper_wp_plugin_info( $res, $action, $args ) {
 	return $res;
 }
 
-function utexas_smtp_helper_wp_plugin_update( $transient ) {
+function utexas_smtp_helper_plugin_update( $transient ) {
 	if ( empty( $transient->checked ) ) {
 		return $transient;
 	}
-	$latest = utexas_smtp_helper_wp_get_remote_data();
+	$latest = utexas_smtp_helper_get_remote_data();
 	if ( false === $latest ) {
 		return $transient;
 	}
-	$local_info = utexas_smtp_helper_wp_get_local_data();
+	$local_info = utexas_smtp_helper_get_local_data();
 	if ( version_compare( $local_info['Version'], $latest['Version'], '<' ) ) {
 		$res              = new stdClass();
 		$res->slug        = $local_info['TextDomain'];
@@ -69,11 +69,11 @@ function utexas_smtp_helper_wp_plugin_update( $transient ) {
 	return $transient;
 }
 
-function utexas_smtp_helper_wp_get_local_data() {
+function utexas_smtp_helper_get_local_data() {
 	return get_plugin_data( plugin_dir_path( __FILE__ ) . UtexasSmtpPluginUpdater::$slug . '.php' );
 }
 
-function utexas_smtp_helper_wp_get_remote_data() {
+function utexas_smtp_helper_get_remote_data() {
 	$plugin_name = UtexasSmtpPluginUpdater::$slug;
 	// Implement WordPress transient cache.
 	// Compare https://github.com/eduardovillao/wp-self-host-updater-checker/blob/main/class-updater-checker.php
@@ -92,7 +92,7 @@ function utexas_smtp_helper_wp_get_remote_data() {
 	return $latest;
 }
 
-function utexas_smtp_helper_wp_move_plugin( $result, $options ) {
+function utexas_smtp_helper_move_plugin( $result, $options ) {
 	if ( ! array_key_exists( 'plugin', $options ) ) {
 		return;
 	}
