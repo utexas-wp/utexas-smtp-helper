@@ -7,6 +7,7 @@
  * Author: Web Content Management Solutions, UT Austin
  * Text Domain: utexas-smtp-helper
  * Plugin URI: https://github.com/utexas-wp/utexas-smtp-helper
+ * Update URI: https://github.com/utexas-wp/utexas-smtp-helper/archive/refs/heads/master.zip
  * Requires Plugins: wp-mail-smtp
  *
  * @package utexas-smtp-helper
