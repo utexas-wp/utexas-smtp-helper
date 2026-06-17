@@ -12,23 +12,26 @@
  * @package utexas-smtp-helper
  */
 
-// See https://wpmailsmtp.com/docs/how-to-secure-smtp-settings-by-using-constants/.
-define( 'WPMS_ON', true );
-define( 'WPMS_MAILER', 'smtp' );
-define( 'WPMS_SSL', 'tls' );
-define( 'WPMS_SMTP_AUTH', true );
-define( 'WPMS_SMTP_AUTOTLS', true );
+// This plugin only populates values in Pantheon environments.
+if ( function_exists( 'pantheon_get_secret' ) ) {
+	// See https://wpmailsmtp.com/docs/how-to-secure-smtp-settings-by-using-constants/.
+	define( 'WPMS_ON', true );
+	define( 'WPMS_MAILER', 'smtp' );
+	define( 'WPMS_SSL', 'tls' );
+	define( 'WPMS_SMTP_AUTH', true );
+	define( 'WPMS_SMTP_AUTOTLS', true );
 
-$settings = array(
-	'WPMS_SMTP_HOST'     => 'utexas_smtp_host',
-	'WPMS_SMTP_PORT'     => 'utexas_smtp_port',
-	'WPMS_SMTP_PROTOCOL' => 'utexas_smtp_protocol',
-	'WPMS_SMTP_USER'     => 'utexas_smtp_username',
-	'WPMS_SMTP_PASS'     => 'utexas_smtp_password',
-);
-foreach ( $settings as $constant => $secret ) {
-	$credential = function_exists( 'pantheon_get_secret' ) ? pantheon_get_secret( $secret ) ?? '' : '';
-	define( $constant, $credential );
+	$settings = array(
+		'WPMS_SMTP_HOST'     => 'utexas_smtp_host',
+		'WPMS_SMTP_PORT'     => 'utexas_smtp_port',
+		'WPMS_SMTP_PROTOCOL' => 'utexas_smtp_protocol',
+		'WPMS_SMTP_USER'     => 'utexas_smtp_username',
+		'WPMS_SMTP_PASS'     => 'utexas_smtp_password',
+	);
+	foreach ( $settings as $constant => $secret ) {
+		$credential = pantheon_get_secret( $secret ) ?? '';
+		define( $constant, $credential );
+	}
 }
 
 // Display message on the dashboard when WP Mail SMTP plugin missing.
