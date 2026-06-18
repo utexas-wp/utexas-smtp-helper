@@ -26,6 +26,7 @@ Updates are provided by the WordPress Update API. Use either the WordPress UI to
 
 ### Coding standards
 This project follows the [WordPress-Core coding standard](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
+
 ### Release protocol
 See `wp-content/plugins/utexas-smtp-helper/.github/ISSUE_TEMPLATE/release.md`
 
