@@ -10,10 +10,11 @@ This WordPress plugin supports email delivery on the Pantheon Hosting service. I
 4. In WordPress "Dev" environment UI, go to Plugins (`/wp-admin/plugins.php`).
 5. Go to **Plugins > Add New Plugin** (`/wp-admin/plugin-install.php`)
 6. Using the "Search plugins" form, find and add "WP Mail SMTP", authored by Syed Balki.
-7. Active the "WP Mail SMTP" plugin. It will redirect you to an external setup helper which you do not need to use. Click "Go back to the Dashboard."
+7. Activate the "WP Mail SMTP" plugin. It will redirect you to an external setup helper which you do not need to use. Click "Go back to the Dashboard."
 6. From the same interface, click "Upload New Plugin."
 7. Upload the zip file and activate the plugin.
 8. Confirm you can send email at **WP Mail SMTP > Tools** (`wp-admin/admin.php?page=wp-mail-smtp-tools`)
+9. Use the Pantheon dashboard to commit the file changes in the "Dev" environment and deploy to the "Test" and "Live" environments, activating and testing the plugins in those environments.
 
 > Note: you can adjust some settings for email, such as the "From" email address and name, at `/wp-admin/admin.php?page=wp-mail-smtp`; you do not need to use the "Setup Wizard" and do not need to purchase the "Pro" version of the plugin to send email.
 
