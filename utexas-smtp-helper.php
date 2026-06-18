@@ -7,10 +7,14 @@
  * Author: Web Content Management Solutions, UT Austin
  * Text Domain: utexas-smtp-helper
  * Plugin URI: https://github.com/utexas-wp/utexas-smtp-helper
+ * Update URI: https://github.com/utexas-wp/utexas-smtp-helper/archive/refs/heads/master.zip
  * Requires Plugins: wp-mail-smtp
  *
  * @package utexas-smtp-helper
  */
+
+// Add file includes.
+require_once plugin_dir_path( __FILE__ ) . 'plugin-updater.php';
 
 // This plugin only populates values in Pantheon environments.
 if ( function_exists( 'pantheon_get_secret' ) ) {
