@@ -94,11 +94,7 @@ function utexas_smtp_helper_get_remote_data() {
 
 function utexas_smtp_helper_move_plugin( $result, $options ) {
 	if ( ! array_key_exists( 'plugin', $options ) ) {
-<<<<<<< HEAD
-		return;
-=======
 		return $result;
->>>>>>> develop
 	}
 	// Only move if the original plugin was in the expected location.
 	if ( UtexasSmtpPluginUpdater::$slug . '/' . UtexasSmtpPluginUpdater::$slug . '.php' !== $options['plugin'] ) {
