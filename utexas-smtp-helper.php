@@ -14,7 +14,7 @@
  */
 
 // Add file includes.
-require_once plugin_dir_path(__FILE__) . 'plugin-updater.php';
+require_once plugin_dir_path( __FILE__ ) . 'plugin-updater.php';
 
 // This plugin only populates values in Pantheon environments.
 if ( function_exists( 'pantheon_get_secret' ) ) {
