@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: UTexas SMTP Helper
- * Version: 0.1.0
+ * Version: 1.0.0
  * Description: UT-specific configuration for use with the WP Mail SMTP plugin.
  * Author: Web Content Management Solutions, UT Austin
  * Text Domain: utexas-smtp-helper
